@@ -5,6 +5,7 @@ class MovableObject {
     height = 150;
     width = 100;
     imageCache = {}; // JSON/Objekt um bilder abzuspeichern, charachter und chicken animieren
+    currentImage = 0;
 
     loadImage(path) {
         this.img = new Image();
