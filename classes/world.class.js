@@ -38,8 +38,7 @@ class World {
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
         
-
-
+        
         // draw() wird immer wieder aufgerufen
         let self = this; // erkennt keine this also muss in variable this einpacken
         requestAnimationFrame(function() {
