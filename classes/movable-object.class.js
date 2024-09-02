@@ -4,6 +4,7 @@ class MovableObject {
     img;
     height = 150;
     width = 100;
+    imageCache = []; // array um bilder abzuspeichern, charachter und chicken animieren
 
     loadImage(path) {
         this.img = new Image();
