@@ -6,6 +6,7 @@ class MovableObject {
     width = 100;
     imageCache = {}; // JSON/Objekt um bilder abzuspeichern, charachter und chicken animieren
     currentImage = 0;
+    speed = 0.15;
 
     loadImage(path) {
         this.img = new Image();
@@ -29,6 +30,8 @@ class MovableObject {
     }
 
     moveLeft() {
-        console.log("Moving right");
+        setInterval(() => {
+            this.x -= this.speed; // pixel
+        }, 1000 / 60); // speed
     }
 }

@@ -18,15 +18,19 @@ class World {
     ];
     canvas;
     ctx;
+    keyboard;
 
-
-
-    constructor(){
+    constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas; // greift auf globale variable canvas nicht in constructor
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
     }
 
+    setWorld(){
+        this.character.world = this;
+    }
 
     draw() {
         // world löschen
@@ -38,7 +42,7 @@ class World {
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
         
-        
+
         // draw() wird immer wieder aufgerufen
         let self = this; // erkennt keine this also muss in variable this einpacken
         requestAnimationFrame(function() {
