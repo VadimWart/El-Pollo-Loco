@@ -15,7 +15,7 @@ class World {
         this.setWorld();
     }
 
-    setWorld(){
+    setWorld() {
         this.character.world = this;
     }
 
@@ -42,7 +42,7 @@ class World {
     }
 
     // function und forEach für darstellung von Objekten
-    addObjectsToMap(objects){
+    addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
         });
@@ -51,16 +51,26 @@ class World {
     // function von darstellung von Objekten
     addToMap(mo) {
         if (mo.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(mo.width, 0);
-            this.ctx.scale(-1, 1);
-            mo.x = mo.x * -1;
+            this.flipImage(mo);
         }
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
+
         if (mo.otherDirection) {
-            mo.x = mo.x * -1;
-            this.ctx.restore();
-            
+            this.flipImageBack(mo);   
         }
+    }
+
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
     }
 }
