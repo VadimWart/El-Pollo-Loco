@@ -1,34 +1,37 @@
 class StatusBar extends DrawableObject {
 
-
     IMAGES = [
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png',
+        'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png'
 
-    ]
+    ];
 
    percentage = 100;
    
-   
-   
-   
-   
-   
+    
     constructor() {
-        this.loadImage(this.IMAGES);
+        super();
+        // Lade alle Bilder ins imageCache
+        this.loadImages(this.IMAGES);
+        this.x = 50;
+        this.y = 0;
+        this.width = 200;
+        this.height = 60;
+        this.setPercentage(100); // Setze das anfängliche Bild basierend auf dem Prozentsatz
     }
 
-    // setPercentage(50)
+    // Setzt den Prozentsatz und wählt das entsprechende Bild aus dem Cache
     setPercentage(percentage) {
         this.percentage = percentage; // => 0 ... 5
         let path = this.IMAGES[this.resolveImageIndex()];
-        this.img = this.imageCache[path];
+        this.img = this.imageCache[path]; // Hole das Bild aus dem Cache
     }
 
+    // Bestimmt das entsprechende Bild basierend auf dem Prozentsatz
     resolveImageIndex() {
         if(this.percentage == 100) {
             return 5;
@@ -44,8 +47,4 @@ class StatusBar extends DrawableObject {
             return 0;
         }
     }
-
-
-
-
 }
