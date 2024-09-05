@@ -12,12 +12,15 @@ class ChickenSmall extends MovableObject {
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ];
 
+    // chicken_sound = new Audio('audio/chicken.mp3');
+    // intervalMove;
+
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 400 + Math.random() * 1200;
-        this.speed = 0.15 + Math.random() *  0.5;
+        this.speed = 0.12 + Math.random() *  0.4;
         this.animate();
     }
  
