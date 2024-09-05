@@ -55,7 +55,6 @@ class Character extends MovableObject {
     }
 
     animate(){
-
         setInterval(() => {
             this.walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -78,7 +77,6 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-
             if(this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
