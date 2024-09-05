@@ -26,5 +26,32 @@ h1 {
 
 canvas {
     background-color: black;
+    display: block;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+@media(max-width: 720px) {
+    h1 {
+      display: none;
+    }
+  }
+  
+  @media(max-height: 720px) {
+    h1 {
+      display: none;
+    }
+  }
+
+/* Smartphones */
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+/* Smartphones */
+@media only screen and (max-width: 480px) {
+    canvas {
+        height: 100vh;
+    }
 }
