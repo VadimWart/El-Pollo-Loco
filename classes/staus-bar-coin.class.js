@@ -1,17 +1,16 @@
-class StatusBar extends DrawableObject {
+class StatusBarCoin extends DrawableObject {
     x = 50;
-    y = 0;
+    y = 50;
     width = 200;
     height = 60;
-    percentage = 100;
 
     IMAGES = [
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png'
+        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/20.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/40.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/60.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/80.png',
+        'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png'
 
     ];
 
@@ -20,7 +19,7 @@ class StatusBar extends DrawableObject {
         super();
         // Lade alle Bilder ins imageCache
         this.loadImages(this.IMAGES);
-        this.setPercentage(100); // Setze das anfängliche Bild basierend auf dem Prozentsatz
+        this.setPercentage(0); // Setze das anfängliche Bild basierend auf dem Prozentsatz
     }
 
     // Setzt den Prozentsatz und wählt das entsprechende Bild aus dem Cache
