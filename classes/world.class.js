@@ -32,6 +32,8 @@ class World {
         setInterval(()  => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkCollisionsBottles();
+            this.checkCollisionsCoins();
         }, 200);
     }
 
@@ -50,7 +52,25 @@ class World {
             }
         });
     }
-    
+
+    checkCollisionsBottles() {
+        this.level.bottles.forEach((bottle, index) =>{
+          if (this.character.isColliding(bottle)) {
+             this.collectBottles(bottle, index);
+             this.statusBarBottles.setPercentage(this.statusBarBottles.percentage + 12.5);
+          }
+        });
+    }
+
+    checkCollisionsCoins() {
+        this.level.coins.forEach((coin, index) => {
+            if (this.character.isColliding(coin)) {
+                this.collectCoins(coin, index);
+                this.statusBarCoin.setPercentage(this.statusBarCoin.percentage + 12.5);
+            }
+        });
+    }
+     
     draw() {
         // world löschen
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -63,7 +83,6 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
-        // this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObject);
         this.ctx.translate(-this.camera_x, 0);
         // ------- Space for fixed objrcts -------
@@ -72,7 +91,6 @@ class World {
         this.addToMap(this.statusBarBottles);
         this.addToMap(this.statusBarEndboss);
         this.ctx.translate(this.camera_x, 0);
-
 
         this.ctx.translate(-this.camera_x, 0);
         
@@ -97,7 +115,6 @@ class World {
         }
 
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);   
@@ -114,5 +131,17 @@ class World {
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
+    }
+
+    collectBottles(bottle, index) {
+        // this.audioManager.playBottleSound();
+        this.bottles.push(bottle);// Füge die Flasche dem Inventar des Charakters hinzu
+        this.level.bottles.splice(index, 1);// Entferne die Flasche aus dem Level
+    }
+
+    collectCoins(coin, index) {
+        // this.audioManager.playBottleSound();
+        this.coins.push(coin);// Füge die Coins dem Inventar des Charakters hinzu
+        this.level.coins.splice(index, 1);// Entferne die Coins aus dem Level
     }
 }
