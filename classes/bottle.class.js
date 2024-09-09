@@ -10,9 +10,9 @@ class Bottle extends DrawableObject {
   
     constructor() {
          super();
-        let randomImage = this.IMAGES[Math.floor(Math.random() * this.IMAGES.length)];
+        let randomBottlesImage = this.IMAGES[Math.floor(Math.random() * this.IMAGES.length)];
         this.x = 400 + Math.random() * 1500;
-        this.loadImage(randomImage); // Zufälliges Bild laden
+        this.loadImage(randomBottlesImage); // Zufälliges Bild laden
         this.loadImages(this.IMAGES); // Alle Bilder für Animationen vorladen
       }
 }

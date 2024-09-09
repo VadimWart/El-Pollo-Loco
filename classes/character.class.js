@@ -41,18 +41,21 @@ class Character extends MovableObject {
     ];
 
     world;
+
     
-
-
     constructor(){
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+        super().loadImage(this.IMAGES_WALKING[0]);
         this.audioManager = new AudioManager();
-        this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_JUMPING);
-        this.loadImages(this.IMAGES_DEAD);
-        this.loadImages(this.IMAGES_HURT);
+        this.loadAllImages();
         this.applyGravity();
         this.animate();
+    }
+
+    loadAllImages() {
+        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_JUMPING);
     }
 
     animate(){
