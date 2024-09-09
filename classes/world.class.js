@@ -9,7 +9,11 @@ class World {
     statusBar = new StatusBar();
     statusBarCoin = new StatusBarCoin();
     statusBarBottles = new StatusBarBottles();
+    statusBarEndboss = new StatusBarEndboss();
     throwableObject = [];
+    coins = [];
+    bottles = [];
+
 
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
@@ -57,12 +61,16 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+        // this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObject);
         this.ctx.translate(-this.camera_x, 0);
         // ------- Space for fixed objrcts -------
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottles);
+        this.addToMap(this.statusBarEndboss);
         this.ctx.translate(this.camera_x, 0);
 
 

@@ -5,8 +5,9 @@ class Cloud extends MovableObject {
     constructor(){
         super().loadImage('img/5_background/layers/4_clouds/1.png');
         this.x = Math.random() * 2400; // cloud range
-        this.animate();
         this.y = 10 + Math.random() * 30;
+        this.animate();
+        
     }
 
     animate() { // wolken animation
