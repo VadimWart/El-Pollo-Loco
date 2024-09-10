@@ -41,6 +41,16 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    hitEndboss() {
+        // Logik, was passiert, wenn der Charakter den Endboss trifft
+        this.energy -= 100; // Beispiel: Energie um 100 reduzieren
+        if (this.energy < 0) {
+          this.energy = 0; // Energie kann nicht unter 0 fallen
+        } else {
+          this.lastHit = new Date().getTime();
+        }
+    }
+
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // Differenc in ms
         timepassed = timepassed / 1000; // Difference in sek

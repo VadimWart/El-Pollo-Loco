@@ -36,6 +36,7 @@ lastThrowTime = 0;class World {
             this.checkThrowObjects();
             this.checkCollisionsBottles();
             this.checkCollisionsCoins();
+            this.checkCollisionsEndboss();
         }, 200);
     }
 
@@ -77,6 +78,15 @@ lastThrowTime = 0;class World {
             }
         });
     }
+
+    checkCollisionsEndboss() {
+        this.level.endboss.forEach((endboss) => { // Iteriere durch das endboss-Array
+            if (this.character.isColliding(endboss)) { // Prüfe auf Kollision mit dem Endboss
+                this.character.hitEndboss();
+                this.statusBar.setPercentage(this.character.energy);
+            }
+        });
+    }   
      
     draw() {
         // world löschen
