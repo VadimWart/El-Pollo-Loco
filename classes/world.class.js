@@ -37,6 +37,7 @@ lastThrowTime = 0;class World {
             this.checkCollisionsBottles();
             this.checkCollisionsCoins();
             this.checkCollisionsByEndboss();
+            this.jumpOnEnemy();
         }, 200);
     }
 

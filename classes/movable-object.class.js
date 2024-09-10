@@ -94,9 +94,9 @@ class MovableObject extends DrawableObject {
         this.speedY = 20;
     }
 
-    jumpOnChicken() {
+    jumpOfEnemy() {
         this.speedY = 20;
-      }
+    }
 
 }
 
