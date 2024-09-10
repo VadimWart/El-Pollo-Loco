@@ -26,7 +26,7 @@ class ThrowableObject extends MovableObject {
         this.x = x;
         this.y = y;
         this.trow();
-        this.animete();
+        this.animate();
     }
 
     loadAllImages() {
@@ -52,7 +52,7 @@ class ThrowableObject extends MovableObject {
         clearInterval(this.intervalTrow);
     }
 
-    animete() {
+    animate() {
         this.intervalBottle = setInterval(() => {
             if (this.isBrocken && this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
