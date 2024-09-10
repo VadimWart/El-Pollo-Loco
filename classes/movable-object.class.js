@@ -41,7 +41,20 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    hitEnemy() {
+        this.energy = 0;
+    }
+
     hitEndboss() {
+        this.energy -= 20;
+        if (this.energy < 0) {
+          this.energy = 0;
+        } else {
+          this.lastHit = new Date().getTime();
+        }
+      }
+
+    hitByEndboss() {
         // Logik, was passiert, wenn der Charakter den Endboss trifft
         this.energy -= 100; // Beispiel: Energie um 100 reduzieren
         if (this.energy < 0) {
@@ -80,6 +93,10 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 20;
     }
+
+    jumpOnChicken() {
+        this.speedY = 20;
+      }
 
 }
 

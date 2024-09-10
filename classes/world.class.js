@@ -36,7 +36,7 @@ lastThrowTime = 0;class World {
             this.checkThrowObjects();
             this.checkCollisionsBottles();
             this.checkCollisionsCoins();
-            this.checkCollisionsEndboss();
+            this.checkCollisionsByEndboss();
         }, 200);
     }
 
@@ -50,6 +50,17 @@ lastThrowTime = 0;class World {
           this.statusBarBottles.setPercentage(this.statusBarBottles.percentage - 12.5);
           this.lastThrowTime = now;
         }
+    }
+
+    jumpOnEnemy() {
+        this.level.enemies.forEach((enemy, index) => {
+            if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
+                // this.audioManager
+                this.character.jumpOfEnemy();
+                enemy.hitEnemy();
+                this.deleteEnemy(index);
+            }
+        });
     }
 
     checkCollisions() {
@@ -79,10 +90,10 @@ lastThrowTime = 0;class World {
         });
     }
 
-    checkCollisionsEndboss() {
+    checkCollisionsByEndboss() {
         this.level.endboss.forEach((endboss) => { // Iteriere durch das endboss-Array
             if (this.character.isColliding(endboss)) { // Prüfe auf Kollision mit dem Endboss
-                this.character.hitEndboss();
+                this.character.hitByEndboss();
                 this.statusBar.setPercentage(this.character.energy);
             }
         });
