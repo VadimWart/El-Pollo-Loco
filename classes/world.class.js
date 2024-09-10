@@ -41,6 +41,37 @@ lastThrowTime = 0;class World {
         }, 200);
     }
 
+    draw() {
+        // world löschen
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.ctx.translate(this.camera_x, 0);
+        // darstellung von Objekten wie character, enemies, und clouds ... .
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.endboss);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.throwableObject);
+        this.ctx.translate(-this.camera_x, 0);
+        // ------- Space for fixed objrcts -------
+        this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottles);
+        this.addToMap(this.statusBarEndboss);
+        this.ctx.translate(this.camera_x, 0);
+
+        this.ctx.translate(-this.camera_x, 0);
+        
+        // draw() wird immer wieder aufgerufen
+        let self = this; // erkennt keine this also muss in variable this einpacken
+        requestAnimationFrame(function() {
+            self.draw();
+        });
+    }
+
     checkThrowObjects() {
         let now = Date.now();
         if (this.keyboard.D && this.bottles.length > 0 && now - this.lastThrowTime >= 800) {
@@ -52,6 +83,39 @@ lastThrowTime = 0;class World {
           this.lastThrowTime = now;
         }
     }
+
+    /**
+     * Checks if a bottle colliding with an enemy
+     * 
+     */
+    // checkBottleCollisionWithAllEnemies() {
+    //     this.throwableObject.forEach((bottle, bottleIndex) => {
+    //     this.checkBottleCollisionWithEnemies(bottle, bottleIndex);
+    //     this.checkBottleCollisionWithEndBoss(bottle, bottleIndex);
+    //     });
+    // }
+
+    // checkBottleCollisionWithEnemies(bottle, bottleIndex) {
+    //     this.level.enemies.forEach((enemy, enemyIndex) => {
+    //     if (bottle.isColliding(enemy)) {
+    //         // this.audioManager.playKillSound();
+    //         enemy.killTheEnemy();
+    //         this.deleteEnemy(enemyIndex);
+    //         this.deleteBottle(bottleIndex);
+    //     }
+    //     });
+    // }
+
+    // checkBottleCollisionWithEndBoss(bottle, bottleIndex) {
+    //     this.level.endboss.forEach((endboss, endbossIndex) => {
+    //     if (bottle.isColliding(endboss) && !this.hitBottles.has(bottle)) {
+    //         endboss.hitEndboss();
+    //         this.statusBarEndboss.setPercentage(endboss.energy);
+    //         this.hitBottles.add(bottle);
+    //         this.deleteBottle(bottleIndex);
+    //     }
+    //     });
+    // }
 
     jumpOnEnemy() {
         this.level.enemies.forEach((enemy, index) => {
@@ -99,37 +163,6 @@ lastThrowTime = 0;class World {
             }
         });
     }   
-     
-    draw() {
-        // world löschen
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.ctx.translate(this.camera_x, 0);
-        // darstellung von Objekten wie character, enemies, und clouds ... .
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.endboss);
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottles);
-        this.addObjectsToMap(this.throwableObject);
-        this.ctx.translate(-this.camera_x, 0);
-        // ------- Space for fixed objrcts -------
-        this.addToMap(this.statusBar);
-        this.addToMap(this.statusBarCoin);
-        this.addToMap(this.statusBarBottles);
-        this.addToMap(this.statusBarEndboss);
-        this.ctx.translate(this.camera_x, 0);
-
-        this.ctx.translate(-this.camera_x, 0);
-        
-        // draw() wird immer wieder aufgerufen
-        let self = this; // erkennt keine this also muss in variable this einpacken
-        requestAnimationFrame(function() {
-            self.draw();
-        });
-    }
 
     // function und forEach für darstellung von Objekten
     addObjectsToMap(objects) {
