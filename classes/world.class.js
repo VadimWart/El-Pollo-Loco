@@ -1,4 +1,4 @@
-class World {
+lastThrowTime = 0;class World {
 
     character = new Character();
     level = level1;
@@ -6,6 +6,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    lastThrowTime = 0;
     statusBar = new StatusBar();
     statusBarCoin = new StatusBarCoin();
     statusBarBottles = new StatusBarBottles();
@@ -16,6 +17,7 @@ class World {
 
 
     constructor(canvas, keyboard){
+        this.audioManager = new AudioManager();
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas; // greift auf globale variable canvas nicht in constructor
         this.keyboard = keyboard;
@@ -38,9 +40,14 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObject.push(bottle);
+        let now = Date.now();
+        if (this.keyboard.D && this.bottles.length > 0 && now - this.lastThrowTime >= 800) {
+          let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+        //   this.audioManager.playThrowingSound();
+          this.throwableObject.push(bottle);
+          this.bottles.pop();
+          this.statusBarBottles.setPercentage(this.statusBarBottles.percentage - 12.5);
+          this.lastThrowTime = now;
         }
     }
 
@@ -80,6 +87,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
@@ -143,5 +151,25 @@ class World {
         // this.audioManager.playBottleSound();
         this.coins.push(coin);// Füge die Coins dem Inventar des Charakters hinzu
         this.level.coins.splice(index, 1);// Entferne die Coins aus dem Level
+    }
+
+    /**
+     * Delete enemy from the array
+     * 
+     */
+    deleteEnemy(index) {
+        setTimeout(() => {
+        level1.enemies.splice(index, 1);
+        }, 400); 
+    }
+
+    /**
+     * Delete bottle from the array
+     * 
+     */
+    deleteBottle(index) {
+        setTimeout(() => {
+        this.throwableObject.splice(index, 1);
+        }, 100); 
     }
 }

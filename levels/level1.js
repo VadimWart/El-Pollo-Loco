@@ -10,6 +10,8 @@ const level1 = new level(
         new ChickenSmall(),
         new ChickenSmall(),
         new ChickenSmall(), 
+    ],
+    [
         new Endboss(),
     ],
     [
