@@ -8,6 +8,7 @@ class Bottle extends DrawableObject {
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ];
   
+    
     constructor() {
          super();
         let randomBottlesImage = this.IMAGES[Math.floor(Math.random() * this.IMAGES.length)];

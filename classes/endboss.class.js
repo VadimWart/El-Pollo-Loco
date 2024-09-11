@@ -47,7 +47,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
-    
+
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
@@ -69,5 +69,4 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_WALKING);
         }, 100);
     }
-
 }
