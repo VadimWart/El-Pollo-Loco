@@ -122,7 +122,6 @@ class World {
     jumpOnEnemy() {
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0) {
-                // this.audioManager
                 this.character.jumpOfEnemy();
                 enemy.hitEnemy();
                 this.deleteEnemy(index);
@@ -141,9 +140,10 @@ class World {
 
     checkCollisionsBottles() {
         this.level.bottles.forEach((bottle, index) =>{
-          if (this.character.isColliding(bottle)) {
-             this.collectBottles(bottle, index);
-             this.statusBarBottles.setPercentage(this.statusBarBottles.percentage + 12.5);
+            if (this.character.isColliding(bottle)) {
+                this.audioManager.playPopSound();
+                this.collectBottles(bottle, index);
+                this.statusBarBottles.setPercentage(this.statusBarBottles.percentage + 12.5);
           }
         });
     }
@@ -151,6 +151,7 @@ class World {
     checkCollisionsCoins() {
         this.level.coins.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
+                this.audioManager.playCoinSound();
                 this.collectCoins(coin, index);
                 this.statusBarCoin.setPercentage(this.statusBarCoin.percentage + 12.5);
             }

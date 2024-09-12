@@ -25,6 +25,7 @@ class ThrowableObject extends MovableObject {
 
     constructor(x, y) {
         super().loadImage(this.IMAGES_BOTTLE_ROTATION[0]);
+        this.audioManager = new AudioManager();
         this.loadAllImages();
         this.x = x;
         this.y = y;
@@ -58,8 +59,10 @@ class ThrowableObject extends MovableObject {
     animate() {
         this.intervalBottle = setInterval(() => {
             if (this.isBrocken && this.isAboveGround()) {
+                // this.audioManager.playSplashSound();  
                 this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
             } else {
+                // this.audioManager.stopSplashSound();  
                 this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
             }
         }, 50);

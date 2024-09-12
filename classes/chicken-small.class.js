@@ -14,10 +14,10 @@ class ChickenSmall extends MovableObject {
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ];
 
-    // chicken_sound = new Audio('audio/chicken.mp3');
 
     constructor(){
         super().loadImage(this.IMAGES_WALKING[0]);
+        this.audioManager = new AudioManager();
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 400 + Math.random() * 1200;
@@ -39,6 +39,7 @@ class ChickenSmall extends MovableObject {
     smallChickenAnimatiionDeadWalk() {
         let intervalDeadMove = setInterval(() => {
              if (this.isDead()) {
+                this.audioManager.playChickenSound();
                 clearInterval(this.intervalMove);
                 this.playAnimation(this.IMAGES_DEAD);
                 clearInterval(intervalDeadMove);

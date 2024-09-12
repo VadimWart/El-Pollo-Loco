@@ -8,6 +8,33 @@ class AudioManager {
         this.hurt_sound = new Audio('audio/hurt_character.mp3');
         this.jump_sound = new Audio('audio/jump.mp3');
         this.win_sound = new Audio('audio/win.mp3');
+        this.coin_sound = new Audio('audio/coin.mp3');
+        this.pop_sound = new Audio('audio/pop_bottle.mp3');
+        this.splash_sound = new Audio('audio/bottle_splash.mp3');
+    }
+
+    playSplashSound() {
+        this.splash_sound.play();
+    }
+
+    stopSplashSound() {
+        this.splash_sound.pause();
+    }
+
+    playPopSound() {
+        this.pop_sound.play();
+    }
+
+    stopPopSound() {
+        this.pop_sound.pause();
+    }
+
+    stopCoinSound() {
+        this.coin_sound.pause();
+    }
+
+    playCoinSound() {
+        this.coin_sound.play();
     }
 
     playWalkingSound() {

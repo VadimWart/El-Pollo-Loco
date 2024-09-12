@@ -51,7 +51,7 @@ class Endboss extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
-        // this.audioManager.
+        this.audioManager = new AudioManager();
         this.loadAllImages();
         this.x = 2500;
         this.speed = 0.5;
@@ -86,13 +86,13 @@ class Endboss extends MovableObject {
     }
 
     endbossMove() {
-        // this.audioManager.
+        this.audioManager.stopEndbossSound();
         this.moveLeft();
         this.playAnimation(this.IMAGES_WALKING);
     }
 
     endbossIsHurt() {
-        // this.audioManager.
+        this.audioManager.playEndbossSound();
         this.speed = 8;
         this.moveLeft();
         this.playAnimation(this.IMAGES_HURT);
@@ -100,21 +100,21 @@ class Endboss extends MovableObject {
 
     endbossIsAlert() {
         if (this.world && this.world.endbossAlert === true) {
-            // this.audioManager.
+            this.audioManager.playEndbossSound();
             this.speed = 0;
             this.playAnimation(this.IMAGES_ALERT);
         }
     }
 
     endbossAttack() {
-        // this.audioManager.
+        this.audioManager.stopEndbossSound();
         this.speed = 12;
         this.moveLeft;
         this.playAnimation(this.IMAGES_ATTACK);
     }
 
     endbossDead() {
-        // this.audioManager.
+        this.audioManager.playChickenSound();
         this.speed = 0;
         this.playAnimation(this.IMAGES_DEAD);
     }
