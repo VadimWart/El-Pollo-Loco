@@ -19,6 +19,9 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
 
+    intervalTrow;
+    intervalBottle;
+
 
     constructor(x, y) {
         super().loadImage(this.IMAGES_BOTTLE_ROTATION[0]);
@@ -69,5 +72,13 @@ class ThrowableObject extends MovableObject {
                 this.x = -5000;
             }, 100);
         }
+    }
+
+    bottleHitEnemys() {
+        world.enemies.forEach(enemy => {
+            if (this.isColliding(enemy)) {
+                this.isBrocken = true;
+            }
+        });
     }
 }

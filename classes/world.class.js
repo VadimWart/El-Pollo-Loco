@@ -1,5 +1,5 @@
-lastThrowTime = 0;class World {
-
+class World {
+    lastThrowTime = 0;
     character = new Character();
     level = level1;
     canvas;
@@ -11,6 +11,7 @@ lastThrowTime = 0;class World {
     statusBarCoin = new StatusBarCoin();
     statusBarBottles = new StatusBarBottles();
     statusBarEndboss = new StatusBarEndboss();
+    setHitBottles = new Set();
     throwableObject = [];
     coins = [];
     bottles = [];
@@ -37,6 +38,7 @@ lastThrowTime = 0;class World {
             this.checkCollisionsBottles();
             this.checkCollisionsCoins();
             this.checkCollisionsByEndboss();
+            this.checkBottleCollisionWithAllEnemies();
             this.jumpOnEnemy();
         }, 200);
     }
@@ -88,34 +90,34 @@ lastThrowTime = 0;class World {
      * Checks if a bottle colliding with an enemy
      * 
      */
-    // checkBottleCollisionWithAllEnemies() {
-    //     this.throwableObject.forEach((bottle, bottleIndex) => {
-    //     this.checkBottleCollisionWithEnemies(bottle, bottleIndex);
-    //     this.checkBottleCollisionWithEndBoss(bottle, bottleIndex);
-    //     });
-    // }
+    checkBottleCollisionWithAllEnemies() {
+        this.throwableObject.forEach((bottle, bottleIndex) => {
+        this.checkBottleCollisionWithEnemies(bottle, bottleIndex);
+        this.checkBottleCollisionWithEndBoss(bottle, bottleIndex);
+        });
+    }
 
-    // checkBottleCollisionWithEnemies(bottle, bottleIndex) {
-    //     this.level.enemies.forEach((enemy, enemyIndex) => {
-    //     if (bottle.isColliding(enemy)) {
-    //         // this.audioManager.playKillSound();
-    //         enemy.killTheEnemy();
-    //         this.deleteEnemy(enemyIndex);
-    //         this.deleteBottle(bottleIndex);
-    //     }
-    //     });
-    // }
+    checkBottleCollisionWithEnemies(bottle, bottleIndex) {
+        this.level.enemies.forEach((enemy, enemyIndex) => {
+        if (bottle.isColliding(enemy)) {
+            // this.audioManager.playKillSound();
+            enemy.hitEnemy();
+            this.deleteEnemy(enemyIndex);
+            this.deleteBottle(bottleIndex);
+        }
+        });
+    }
 
-    // checkBottleCollisionWithEndBoss(bottle, bottleIndex) {
-    //     this.level.endboss.forEach((endboss, endbossIndex) => {
-    //     if (bottle.isColliding(endboss) && !this.hitBottles.has(bottle)) {
-    //         endboss.hitEndboss();
-    //         this.statusBarEndboss.setPercentage(endboss.energy);
-    //         this.hitBottles.add(bottle);
-    //         this.deleteBottle(bottleIndex);
-    //     }
-    //     });
-    // }
+     checkBottleCollisionWithEndBoss(bottle, bottleIndex) {
+        this.level.endboss.forEach((endboss, endbossIndex) => {
+        if (bottle.isColliding(endboss) && !this.setHitBottles.has(bottle)) {
+            endboss.hitEndboss();
+            this.statusBarEndboss.setPercentage(endboss.energy);
+            this.setHitBottles.add(bottle);
+            this.deleteBottle(bottleIndex);
+        }
+        });
+    }
 
     jumpOnEnemy() {
         this.level.enemies.forEach((enemy, index) => {
