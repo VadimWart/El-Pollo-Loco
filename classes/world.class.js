@@ -1,20 +1,20 @@
 class World {
-    lastThrowTime = 0;
-    character = new Character();
     level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
     lastThrowTime = 0;
+    character = new Character();
     statusBar = new StatusBar();
     statusBarCoin = new StatusBarCoin();
     statusBarBottles = new StatusBarBottles();
     statusBarEndboss = new StatusBarEndboss();
-    setHitBottles = new Set();
+    setHitBottles = new Set(); //  Set ist eine spezielle Art von Collection, die nur einzigartige Werte speichert.
     throwableObject = [];
     coins = [];
     bottles = [];
+    endbossAlert = false;
 
 
     constructor(canvas, keyboard){
@@ -40,7 +40,7 @@ class World {
             this.checkCollisionsByEndboss();
             this.checkBottleCollisionWithAllEnemies();
             this.jumpOnEnemy();
-        }, 200);
+        }, 100);
     }
 
     draw() {
@@ -108,7 +108,7 @@ class World {
         });
     }
 
-     checkBottleCollisionWithEndBoss(bottle, bottleIndex) {
+    checkBottleCollisionWithEndBoss(bottle, bottleIndex) {
         this.level.endboss.forEach((endboss, endbossIndex) => {
         if (bottle.isColliding(endboss) && !this.setHitBottles.has(bottle)) {
             endboss.hitEndboss();

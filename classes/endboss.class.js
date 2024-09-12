@@ -51,8 +51,10 @@ class Endboss extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
+        // this.audioManager.
         this.loadAllImages();
         this.x = 2500;
+        this.speed = 0.5;
         this.animate();
     }
 
@@ -65,8 +67,55 @@ class Endboss extends MovableObject {
     }
 
     animate(){
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
+        let intervalEndboss = setInterval(() => {
+            this.endbossMove();
+            this.endbossAnimationDeadWalkHurtAttack();
         }, 100);
+    }
+
+    endbossAnimationDeadWalkHurtAttack() {
+        this.endbossIsAlert();
+        if (this.isDead()) {
+            this.endbossDead();
+            // openWinScreen()
+        } else if (this.isHurt() && this.energy <= 80) {
+            this.endbossIsHurt();
+        } else if (this.energy <= 80 && !this.isDead()) {
+            this.endbossAttack();
+        }
+    }
+
+    endbossMove() {
+        // this.audioManager.
+        this.moveLeft();
+        this.playAnimation(this.IMAGES_WALKING);
+    }
+
+    endbossIsHurt() {
+        // this.audioManager.
+        this.speed = 8;
+        this.moveLeft();
+        this.playAnimation(this.IMAGES_HURT);
+    }
+
+    endbossIsAlert() {
+        if (this.world && this.world.endbossAlert === true) {
+            // this.audioManager.
+            this.speed = 0;
+            this.playAnimation(this.IMAGES_ALERT);
+        }
+    }
+
+    endbossAttack() {
+        // this.audioManager.
+        this.speed = 12;
+        this.moveLeft;
+        this.playAnimation(this.IMAGES_ATTACK);
+    }
+
+    endbossDead() {
+        // this.audioManager.
+        this.speed = 0;
+        this.playAnimation(this.IMAGES_DEAD);
     }
 }
