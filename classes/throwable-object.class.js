@@ -2,6 +2,8 @@ class ThrowableObject extends MovableObject {
     width = 60;
     height = 60;
     isBrocken = false;
+    intervalTrow;
+    intervalBottle;
 
     IMAGES_BOTTLE_ROTATION = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -19,8 +21,7 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
 
-    intervalTrow;
-    intervalBottle;
+
 
 
     constructor(x, y) {
@@ -71,6 +72,7 @@ class ThrowableObject extends MovableObject {
     bottleOnTheGround() {
         if (this.y >= 360) {
             this.isBrocken = true;
+            this.audioManager.playSplashSound(); 
             setTimeout(() => {
                 this.x = -5000;
             }, 100);
