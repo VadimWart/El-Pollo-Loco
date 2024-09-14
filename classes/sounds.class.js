@@ -11,6 +11,7 @@ class AudioManager {
         this.coin_sound = new Audio('audio/coin.mp3');
         this.pop_sound = new Audio('audio/pop_bottle.mp3');
         this.splash_sound = new Audio('audio/bottle_splash.mp3');
+        this.idle_sound = new Audio('audio/idle.mp3');
     }
 
     playSplashSound() {
@@ -19,6 +20,14 @@ class AudioManager {
 
     stopSplashSound() {
         this.splash_sound.pause();
+    }
+
+    playIdleSound() {
+        this.idle_sound.play();
+    }
+
+    stopIdleSound() {
+        this.idle_sound.pause();
     }
 
     playPopSound() {
