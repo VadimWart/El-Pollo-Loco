@@ -132,11 +132,9 @@ function restartGame() {
   let endScreenWin = document.getElementById("endScreenWin");
   let endScreenLose = document.getElementById("endScreenLose");
   let startScreen = document.getElementById("startScreen");
-  //   let instructions = document.getElementById("instructions");
 
   endScreenWin.style.display = "none";
   endScreenLose.style.display = "none";
-  // instructions.style.display = "none";
   startScreen.style.display = "none";
 
   init();
@@ -180,12 +178,10 @@ function clearAllIntervals() {
 
 function toggleMute() {
   const muteButton = document.querySelector(".button-mute");
-  const img = muteButton.querySelector("img");
   const mobileMuteBtn = document.getElementById("muteBtn");
 
   if (!isMuted) {
-    img.src = "./img_pollo_locco/img/lautsprecher.png";
-    mobileMuteBtn.innerHTML = "UNMUTE";
+    mobileMuteBtn.innerText = "UNMUTE";
     background_sound.muted = true;
     win_sound.muted = true;
     game_over_sound.muted = true;
@@ -196,8 +192,7 @@ function toggleMute() {
     });
     isMuted = true;
   } else {
-    img.src = "./img_pollo_locco/img/lautsprecher-aus.png";
-    mobileMuteBtn.innerHTML = "MUTE";
+    mobileMuteBtn.innerText = "MUTE";
     background_sound.muted = false;
     win_sound.muted = false;
     game_over_sound.muted = false;
@@ -228,12 +223,12 @@ function checkOrientation() {
     landscapeScreen.style.display = "flex";
     muteBtn.style.display = "none";
     gameContainer.style.display = "none";
-    overlay.style.display = "none";
+    overlay.style.display = "flex";
   } else {
     landscapeScreen.style.display = "none";
     muteBtn.style.display = "block";
     gameContainer.style.display = "block";
-    overlay.style.display = "none";
+    overlay.style.display = "flex";
   }
 }
 
