@@ -7,6 +7,8 @@ let background_sound = new Audio("audio/background_sound.mp3");
 let win_sound = new Audio("audio/win.mp3");
 let game_over_sound = new Audio("audio/game_over.mp3");
 
+background_sound.volume = 0.05;
+
 function init() {
   startLevel();
   canvas = document.getElementById("canvas");
@@ -177,8 +179,7 @@ function clearAllIntervals() {
 }
 
 function toggleMute() {
-  const muteButton = document.querySelector(".button-mute");
-  const mobileMuteBtn = document.getElementById("muteBtn");
+  const mobileMuteBtn = document.getElementById("muteBtn"); // Use only mobile mute button
 
   if (!isMuted) {
     mobileMuteBtn.innerText = "UNMUTE";
@@ -209,11 +210,9 @@ function checkOrientation() {
   const landscapeScreen = document.getElementById("landscapeScreen");
   const gameContainer = document.querySelector(".game-container");
   const overlay = document.querySelector(".overlay");
-  const muteBtn = document.querySelector(".button-mute");
 
   if (window.innerWidth < 1200 && window.innerHeight < window.innerWidth) {
     landscapeScreen.style.display = "none";
-    muteBtn.style.display = "none";
     gameContainer.style.display = "block";
     overlay.style.display = "flex";
   } else if (
@@ -221,12 +220,10 @@ function checkOrientation() {
     window.innerHeight > window.innerWidth
   ) {
     landscapeScreen.style.display = "flex";
-    muteBtn.style.display = "none";
     gameContainer.style.display = "none";
     overlay.style.display = "flex";
   } else {
     landscapeScreen.style.display = "none";
-    muteBtn.style.display = "block";
     gameContainer.style.display = "block";
     overlay.style.display = "flex";
   }

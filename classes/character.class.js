@@ -148,5 +148,6 @@ class Character extends MovableObject {
   jump() {
     this.speedY = 20;
     this.lastMove = Date.now();
+    this.audioManager.stopWalkingSound();
   }
 }
