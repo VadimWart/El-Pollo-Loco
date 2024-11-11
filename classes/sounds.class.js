@@ -1,8 +1,5 @@
 class AudioManager {
   constructor() {
-    this.walking_sound = new Audio("audio/running.mp3");
-    this.walking_sound.volume = 0.1;
-
     this.chicken_sound = new Audio("audio/chicken_dead.mp3");
     this.chicken_sound.volume = 0.1;
 
@@ -29,7 +26,6 @@ class AudioManager {
   }
 
   muteSounds() {
-    this.walking_sound.muted = true;
     this.chicken_sound.muted = true;
     this.endboss_sound.muted = true;
     this.hurt_sound.muted = true;
@@ -41,7 +37,6 @@ class AudioManager {
   }
 
   unmuteSounds() {
-    this.walking_sound.muted = false;
     this.chicken_sound.muted = false;
     this.endboss_sound.muted = false;
     this.hurt_sound.muted = false;
@@ -82,14 +77,6 @@ class AudioManager {
 
   playCoinSound() {
     this.coin_sound.play();
-  }
-
-  playWalkingSound() {
-    this.walking_sound.play();
-  }
-
-  stopWalkingSound() {
-    this.walking_sound.pause();
   }
 
   playBackgroundSound() {

@@ -7,7 +7,7 @@ let background_sound = new Audio("audio/background_sound.mp3");
 let win_sound = new Audio("audio/win.mp3");
 let game_over_sound = new Audio("audio/game_over.mp3");
 
-background_sound.volume = 0.05;
+background_sound.volume = 0.01;
 
 function init() {
   startLevel();
@@ -39,6 +39,11 @@ window.addEventListener("keydown", (e) => {
 
   if (e.keyCode == 68) {
     keyboard.D = true;
+  }
+
+  if (e.keyCode == 77) {
+    // 'M' für Mute
+    toggleMute();
   }
 });
 
@@ -130,15 +135,12 @@ function startGame() {
 function restartGame() {
   clearAllIntervals();
   pauseSounds();
-
   let endScreenWin = document.getElementById("endScreenWin");
   let endScreenLose = document.getElementById("endScreenLose");
   let startScreen = document.getElementById("startScreen");
-
   endScreenWin.style.display = "none";
   endScreenLose.style.display = "none";
   startScreen.style.display = "none";
-
   init();
   background_sound.play();
 }
@@ -146,11 +148,9 @@ function restartGame() {
 function goToMenu() {
   clearAllIntervals();
   pauseSounds();
-
   let startScreen = document.getElementById("startScreen");
   let endScreenWin = document.getElementById("endScreenWin");
   let endScreenLose = document.getElementById("endScreenLose");
-
   endScreenWin.style.display = "none";
   endScreenLose.style.display = "none";
   startScreen.style.display = "block";
@@ -158,6 +158,7 @@ function goToMenu() {
 
 function openWinScreen() {
   clearAllIntervals();
+  pauseSounds();
   background_sound.pause();
   win_sound.play();
   let endScreenWin = document.getElementById("endScreenWin");
@@ -182,7 +183,7 @@ function toggleMute() {
   const mobileMuteBtn = document.getElementById("muteBtn"); // Use only mobile mute button
 
   if (!isMuted) {
-    mobileMuteBtn.innerText = "UNMUTE";
+    mobileMuteBtn.innerText = "UNMUTE - M";
     background_sound.muted = true;
     win_sound.muted = true;
     game_over_sound.muted = true;
@@ -193,7 +194,7 @@ function toggleMute() {
     });
     isMuted = true;
   } else {
-    mobileMuteBtn.innerText = "MUTE";
+    mobileMuteBtn.innerText = "MUTE - M";
     background_sound.muted = false;
     win_sound.muted = false;
     game_over_sound.muted = false;

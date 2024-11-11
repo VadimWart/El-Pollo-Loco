@@ -10,7 +10,7 @@ class World {
   statusBarCoin = new StatusBarCoin();
   statusBarBottles = new StatusBarBottles();
   statusBarEndboss = new StatusBarEndboss();
-  setHitBottles = new Set(); //  Set ist eine spezielle Art von Collection, die nur einzigartige Werte speichert.
+  setHitBottles = new Set();
   throwableObject = [];
   coins = [];
   bottles = [];
@@ -19,7 +19,7 @@ class World {
   constructor(canvas, keyboard) {
     this.audioManager = new AudioManager();
     this.ctx = canvas.getContext("2d");
-    this.canvas = canvas; // greift auf globale variable canvas nicht in constructor
+    this.canvas = canvas;
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
@@ -66,8 +66,7 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
 
-    // draw() wird immer wieder aufgerufen
-    let self = this; // erkennt keine this also muss in variable this einpacken
+    let self = this;
     requestAnimationFrame(function () {
       self.draw();
     });
@@ -84,7 +83,6 @@ class World {
         this.character.x + 100,
         this.character.y + 100
       );
-      //   this.audioManager.playThrowingSound();
       this.throwableObject.push(bottle);
       this.bottles.pop();
       this.statusBarBottles.setPercentage(
@@ -108,7 +106,6 @@ class World {
   checkBottleCollisionWithEnemies(bottle, bottleIndex) {
     this.level.enemies.forEach((enemy, enemyIndex) => {
       if (bottle.isColliding(enemy)) {
-        // this.audioManager.playKillSound();
         enemy.hitEnemy();
         this.deleteEnemy(enemyIndex);
         this.deleteBottle(bottleIndex);
@@ -174,23 +171,19 @@ class World {
 
   checkCollisionsByEndboss() {
     this.level.endboss.forEach((endboss) => {
-      // Iteriere durch das endboss-Array
       if (this.character.isColliding(endboss)) {
-        // Prüfe auf Kollision mit dem Endboss
         this.character.hitByEndboss();
         this.statusBar.setPercentage(this.character.energy);
       }
     });
   }
 
-  // function und forEach für darstellung von Objekten
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
-  // function von darstellung von Objekten
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
