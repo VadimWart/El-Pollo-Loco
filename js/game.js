@@ -186,10 +186,10 @@ function toggleMute() {
     background_sound.muted = true;
     win_sound.muted = true;
     game_over_sound.muted = true;
-    world.audioManager.muteGameSounds();
-    world.character.audioManager.muteGameSounds();
+    world.audioManager.muteSounds();
+    world.character.audioManager.muteSounds();
     world.level.endboss.forEach((endboss) => {
-      endboss.audioManager.muteGameSounds();
+      endboss.audioManager.muteSounds();
     });
     isMuted = true;
   } else {
@@ -197,10 +197,10 @@ function toggleMute() {
     background_sound.muted = false;
     win_sound.muted = false;
     game_over_sound.muted = false;
-    world.audioManager.unmuteGameSounds();
-    world.character.audioManager.unmuteGameSounds();
+    world.audioManager.unmuteSounds();
+    world.character.audioManager.unmuteSounds();
     world.level.endboss.forEach((endboss) => {
-      endboss.audioManager.unmuteGameSounds();
+      endboss.audioManager.unmuteSounds();
     });
     isMuted = false;
   }

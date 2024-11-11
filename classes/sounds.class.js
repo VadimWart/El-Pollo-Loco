@@ -28,6 +28,30 @@ class AudioManager {
     this.idle_sound.volume = 0.1;
   }
 
+  muteSounds() {
+    this.walking_sound.muted = true;
+    this.chicken_sound.muted = true;
+    this.endboss_sound.muted = true;
+    this.hurt_sound.muted = true;
+    this.jump_sound.muted = true;
+    this.coin_sound.muted = true;
+    this.pop_sound.muted = true;
+    this.splash_sound.muted = true;
+    this.idle_sound.muted = true;
+  }
+
+  unmuteSounds() {
+    this.walking_sound.muted = false;
+    this.chicken_sound.muted = false;
+    this.endboss_sound.muted = false;
+    this.hurt_sound.muted = false;
+    this.jump_sound.muted = false;
+    this.coin_sound.muted = false;
+    this.pop_sound.muted = false;
+    this.splash_sound.muted = false;
+    this.idle_sound.muted = false;
+  }
+
   playSplashSound() {
     this.splash_sound.play();
   }
