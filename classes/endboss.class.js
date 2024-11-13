@@ -48,6 +48,10 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  /**
+   * Creates an instance of the end boss.
+   * Initializes the end boss with the first walking image, audio manager, and properties such as position and speed.
+   */
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
     this.audioManager = new AudioManager();
@@ -57,6 +61,9 @@ class Endboss extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Loads all images for the end boss (walking, dead, hurt, attack, alert).
+   */
   loadAllImages() {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_DEAD);
@@ -65,6 +72,10 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ALERT);
   }
 
+  /**
+   * Animates the end boss by calling its movement and state-based animations.
+   * This is repeatedly called via an interval to update the animation.
+   */
   animate() {
     let intervalEndboss = setInterval(() => {
       this.endbossMove();
@@ -72,6 +83,10 @@ class Endboss extends MovableObject {
     }, 100);
   }
 
+  /**
+   * Updates the end boss's state, switching between attack, hurt, walking, and dead states.
+   * This method checks the health and other conditions to determine the appropriate animation.
+   */
   endbossAnimationDeadWalkHurtAttack() {
     this.endbossIsAlert();
     if (this.isDead()) {
@@ -84,12 +99,18 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Moves the end boss left and plays the walking animation.
+   */
   endbossMove() {
     this.audioManager.stopEndbossSound();
     this.moveLeft();
     this.playAnimation(this.IMAGES_WALKING);
   }
 
+  /**
+   * Triggered when the end boss is hurt. Changes its speed, plays the hurt animation, and plays a sound.
+   */
   endbossIsHurt() {
     this.audioManager.playEndbossSound();
     this.speed = 8;
@@ -97,6 +118,9 @@ class Endboss extends MovableObject {
     this.playAnimation(this.IMAGES_HURT);
   }
 
+  /**
+   * Checks if the end boss is alerted, stops its movement, and plays the alert animation.
+   */
   endbossIsAlert() {
     if (this.world && this.world.endbossAlert === true) {
       this.audioManager.playEndbossSound();
@@ -105,6 +129,9 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * Handles the attack state of the end boss. Increases speed and plays the attack animation.
+   */
   endbossAttack() {
     this.audioManager.stopEndbossSound();
     this.speed = 12;
@@ -112,6 +139,9 @@ class Endboss extends MovableObject {
     this.playAnimation(this.IMAGES_ATTACK);
   }
 
+  /**
+   * Triggered when the end boss dies. Stops movement, plays the death animation, and plays a sound.
+   */
   endbossDead() {
     this.audioManager.playChickenSound();
     this.speed = 0;
