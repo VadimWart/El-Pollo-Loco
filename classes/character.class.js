@@ -5,6 +5,9 @@ class Character extends MovableObject {
   speed = 10;
   lastMove = Date.now();
 
+  /**
+   * Arrays holding paths to images for different character animations.
+   */
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
     "img/2_character_pepe/2_walk/W-22.png",
@@ -70,6 +73,9 @@ class Character extends MovableObject {
 
   world;
 
+  /**
+   * Initializes a new Character instance, loads images, applies gravity, and starts animation.
+   */
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
     this.audioManager = new AudioManager();
@@ -78,6 +84,9 @@ class Character extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Loads all character images for different animation states.
+   */
   loadAllImages() {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_DEAD);
@@ -87,6 +96,9 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_LONG_IDLE);
   }
 
+  /**
+   * Initiates the character's animations by setting intervals for movement and state animations.
+   */
   animate() {
     setInterval(() => {
       this.characterMove();
@@ -97,6 +109,9 @@ class Character extends MovableObject {
     }, 100);
   }
 
+  /**
+   * Controls animation based on character's state (dead, hurt, jumping, walking, or idle).
+   */
   chracterHurtDeadJumpAnimation() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
@@ -113,6 +128,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Handles character movement and updates camera position.
+   */
   characterMove() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
@@ -132,6 +150,9 @@ class Character extends MovableObject {
     this.world.camera_x = -this.x + 100;
   }
 
+  /**
+   * Plays idle animation depending on how long the character has been inactive.
+   */
   characterIdle() {
     if (Date.now() - this.lastMove >= 10000) {
       this.playAnimation(this.IMAGES_LONG_IDLE);
@@ -140,6 +161,9 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+   * Sets character's vertical speed for jumping.
+   */
   jump() {
     this.speedY = 20;
     this.lastMove = Date.now();
