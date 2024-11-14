@@ -25,6 +25,9 @@ class AudioManager {
     this.idle_sound.volume = 0.1;
   }
 
+  /**
+   * Mutes all sounds in the game.
+   */
   muteSounds() {
     this.chicken_sound.muted = true;
     this.endboss_sound.muted = true;
@@ -36,6 +39,9 @@ class AudioManager {
     this.idle_sound.muted = true;
   }
 
+  /**
+   * Unmutes all sounds in the game.
+   */
   unmuteSounds() {
     this.chicken_sound.muted = false;
     this.endboss_sound.muted = false;
