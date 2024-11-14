@@ -16,6 +16,11 @@ class World {
   bottles = [];
   endbossAlert = false;
 
+  /**
+   * Creates a new world instance.
+   * @param {HTMLCanvasElement} canvas - The canvas element where the world will be drawn.
+   * @param {Keyboard} keyboard - The keyboard input handler.
+   */
   constructor(canvas, keyboard) {
     this.audioManager = new AudioManager();
     this.ctx = canvas.getContext("2d");
@@ -26,10 +31,16 @@ class World {
     this.run();
   }
 
+  /**
+   * Sets the world context for the character.
+   */
   setWorld() {
     this.character.world = this;
   }
 
+  /**
+   * Main game loop that checks for various collisions and actions.
+   */
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -42,12 +53,13 @@ class World {
     }, 100);
   }
 
+  /**
+   * Draws the world and all its objects to the canvas.
+   */
   draw() {
-    // world löschen
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.ctx.translate(this.camera_x, 0);
-    // darstellung von Objekten wie character, enemies, und clouds ... .
+
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.clouds);
@@ -63,7 +75,6 @@ class World {
     this.addToMap(this.statusBarBottles);
     this.addToMap(this.statusBarEndboss);
     this.ctx.translate(this.camera_x, 0);
-
     this.ctx.translate(-this.camera_x, 0);
 
     let self = this;
@@ -72,6 +83,9 @@ class World {
     });
   }
 
+  /**
+   * Handles throwing objects (bottles) based on keyboard input.
+   */
   checkThrowObjects() {
     let now = Date.now();
     if (
@@ -103,6 +117,11 @@ class World {
     });
   }
 
+  /**
+   * Checks if a bottle collides with an enemy.
+   * @param {ThrowableObject} bottle - The bottle object.
+   * @param {number} bottleIndex - The index of the bottle in the throwable objects array.
+   */
   checkBottleCollisionWithEnemies(bottle, bottleIndex) {
     this.level.enemies.forEach((enemy, enemyIndex) => {
       if (bottle.isColliding(enemy)) {
@@ -113,6 +132,11 @@ class World {
     });
   }
 
+  /**
+   * Checks if a bottle collides with the end boss.
+   * @param {ThrowableObject} bottle - The bottle object.
+   * @param {number} bottleIndex - The index of the bottle in the throwable objects array.
+   */
   checkBottleCollisionWithEndBoss(bottle, bottleIndex) {
     this.level.endboss.forEach((endboss, endbossIndex) => {
       if (bottle.isColliding(endboss) && !this.setHitBottles.has(bottle)) {
@@ -124,6 +148,9 @@ class World {
     });
   }
 
+  /**
+   * Makes the character jump on an enemy and defeat it.
+   */
   jumpOnEnemy() {
     this.level.enemies.forEach((enemy, index) => {
       if (
@@ -138,6 +165,9 @@ class World {
     });
   }
 
+  /**
+   * Checks for collisions between the character and enemies.
+   */
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
@@ -147,6 +177,9 @@ class World {
     });
   }
 
+  /**
+   * Checks for collisions between the character and bottles.
+   */
   checkCollisionsBottles() {
     this.level.bottles.forEach((bottle, index) => {
       if (this.character.isColliding(bottle)) {
@@ -159,6 +192,9 @@ class World {
     });
   }
 
+  /**
+   * Checks for collisions between the character and coins.
+   */
   checkCollisionsCoins() {
     this.level.coins.forEach((coin, index) => {
       if (this.character.isColliding(coin)) {
@@ -169,6 +205,9 @@ class World {
     });
   }
 
+  /**
+   * Checks for collisions between the character and the end boss.
+   */
   checkCollisionsByEndboss() {
     this.level.endboss.forEach((endboss) => {
       if (this.character.isColliding(endboss)) {
@@ -178,12 +217,20 @@ class World {
     });
   }
 
+  /**
+   * Adds multiple objects to the map for drawing.
+   * @param {Array} objects - The objects to be added to the map.
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * Draws an object on the map and handles its direction if needed.
+   * @param {Object} mo - The object to be added to the map.
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -196,6 +243,10 @@ class World {
     }
   }
 
+  /**
+   * Flips the image for objects facing the opposite direction.
+   * @param {Object} mo - The object to be flipped.
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -203,24 +254,38 @@ class World {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * Restores the image orientation after flipping.
+   * @param {Object} mo - The object whose orientation will be restored.
+   */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
 
+  /**
+   * Collects a bottle when the character collides with it.
+   * @param {Object} bottle - The bottle object.
+   * @param {number} index - The index of the bottle in the level's bottles array.
+   */
   collectBottles(bottle, index) {
     this.bottles.push(bottle);
     this.level.bottles.splice(index, 1);
   }
 
+  /**
+   * Collects a coin when the character collides with it.
+   * @param {Object} coin - The coin object.
+   * @param {number} index - The index of the coin in the level's coins array.
+   */
   collectCoins(coin, index) {
     this.coins.push(coin);
     this.level.coins.splice(index, 1);
   }
 
   /**
-   * Delete enemy from the array
-   *
+   * Deletes an enemy from the level's enemies array.
+   * @param {number} index - The index of the enemy to delete.
    */
   deleteEnemy(index) {
     setTimeout(() => {
@@ -229,8 +294,8 @@ class World {
   }
 
   /**
-   * Delete bottle from the array
-   *
+   * Deletes a bottle from the throwable objects array.
+   * @param {number} index - The index of the bottle to delete.
    */
   deleteBottle(index) {
     setTimeout(() => {
