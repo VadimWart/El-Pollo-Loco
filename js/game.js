@@ -9,6 +9,9 @@ let game_over_sound = new Audio("audio/game_over.mp3");
 
 background_sound.volume = 0.01;
 
+/**
+ * Initializes the game by setting up the canvas, world, and mobile controls.
+ */
 function init() {
   startLevel();
   canvas = document.getElementById("canvas");
@@ -16,6 +19,9 @@ function init() {
   mobileButtons();
 }
 
+/**
+ * Event listener for keydown events. Updates the keyboard object with key states.
+ */
 window.addEventListener("keydown", (e) => {
   if (e.keyCode == 39) {
     keyboard.RIGHT = true;
@@ -42,11 +48,14 @@ window.addEventListener("keydown", (e) => {
   }
 
   if (e.keyCode == 77) {
-    // 'M' für Mute
+    // 'M' for Mute
     toggleMute();
   }
 });
 
+/**
+ * Event listener for keyup events. Updates the keyboard object to reset key states.
+ */
 window.addEventListener("keyup", (e) => {
   if (e.keyCode == 39) {
     keyboard.RIGHT = false;
@@ -73,6 +82,9 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
+/**
+ * Sets up mobile button controls for left, right, jump, and throw actions.
+ */
 function mobileButtons() {
   document.getElementById("btnLeft").addEventListener("touchstart", (e) => {
     e.preventDefault();
@@ -108,6 +120,9 @@ function mobileButtons() {
   });
 }
 
+/**
+ * Pauses all sounds in the game (background, win, game over).
+ */
 function pauseSounds() {
   background_sound.pause();
   background_sound.currentTime = 0;
@@ -117,10 +132,16 @@ function pauseSounds() {
   game_over_sound.currentTime = 0;
 }
 
+/**
+ * Starts the game level.
+ */
 function startLevel() {
   initLevel();
 }
 
+/**
+ * Starts the game, hiding the start screen and showing the game world.
+ */
 function startGame() {
   let startScreen = document.getElementById("startScreen");
   let endScreenWin = document.getElementById("endScreenWin");
@@ -132,6 +153,9 @@ function startGame() {
   endScreenLose.style.display = "none";
 }
 
+/**
+ * Restarts the game, resetting game states and sounds.
+ */
 function restartGame() {
   clearAllIntervals();
   pauseSounds();
@@ -145,6 +169,9 @@ function restartGame() {
   background_sound.play();
 }
 
+/**
+ * Navigates back to the main menu, showing the start screen.
+ */
 function goToMenu() {
   clearAllIntervals();
   pauseSounds();
@@ -156,6 +183,9 @@ function goToMenu() {
   startScreen.style.display = "block";
 }
 
+/**
+ * Displays the win screen and plays the win sound.
+ */
 function openWinScreen() {
   clearAllIntervals();
   pauseSounds();
@@ -165,6 +195,9 @@ function openWinScreen() {
   endScreenWin.style.display = "flex";
 }
 
+/**
+ * Displays the lose screen and plays the game over sound.
+ */
 function openLoseScreen() {
   clearAllIntervals();
   background_sound.pause();
@@ -173,14 +206,20 @@ function openLoseScreen() {
   endScreenLose.style.display = "flex";
 }
 
+/**
+ * Clears all active intervals to stop any running loops.
+ */
 function clearAllIntervals() {
   for (let i = 1; i < 9999; i++) {
     window.clearInterval(i);
   }
 }
 
+/**
+ * Toggles mute on and off, adjusting all sounds accordingly.
+ */
 function toggleMute() {
-  const mobileMuteBtn = document.getElementById("muteBtn"); // Use only mobile mute button
+  const mobileMuteBtn = document.getElementById("muteBtn");
 
   if (!isMuted) {
     mobileMuteBtn.innerText = "UNMUTE - M";
@@ -207,6 +246,9 @@ function toggleMute() {
   }
 }
 
+/**
+ * Checks the screen orientation and adjusts the display accordingly.
+ */
 function checkOrientation() {
   const landscapeScreen = document.getElementById("landscapeScreen");
   const gameContainer = document.querySelector(".game-container");
@@ -230,6 +272,7 @@ function checkOrientation() {
   }
 }
 
+// Event listeners for screen resize and orientation change.
 window.addEventListener("resize", checkOrientation);
 window.addEventListener("orientationchange", checkOrientation);
 window.addEventListener("load", checkOrientation);
