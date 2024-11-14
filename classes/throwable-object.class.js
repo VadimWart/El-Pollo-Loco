@@ -21,6 +21,11 @@ class ThrowableObject extends MovableObject {
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
   ];
 
+  /**
+   * Creates a new Bottle instance.
+   * @param {number} x - The x-coordinate of the bottle.
+   * @param {number} y - The y-coordinate of the bottle.
+   */
   constructor(x, y) {
     super().loadImage(this.IMAGES_BOTTLE_ROTATION[0]);
     this.audioManager = new AudioManager();
@@ -31,11 +36,17 @@ class ThrowableObject extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Loads all images for the bottle's rotation and splash animation.
+   */
   loadAllImages() {
     this.loadImages(this.IMAGES_BOTTLE_ROTATION);
     this.loadImages(this.IMAGES_BOTTLE_SPLASH);
   }
 
+  /**
+   * Simulates the bottle being thrown and falling.
+   */
   trow() {
     this.speedY = 15;
     this.applyGravity();
@@ -49,23 +60,30 @@ class ThrowableObject extends MovableObject {
     }, 10);
   }
 
+  /**
+   * Stops the bottle's animations.
+   */
   stopBottleAnimate() {
     clearInterval(this.applyGravity);
     clearInterval(this.intervalTrow);
   }
 
+  /**
+   * Handles the bottle's animation (rotation or splash based on state).
+   */
   animate() {
     this.intervalBottle = setInterval(() => {
       if (this.isBrocken && this.isAboveGround()) {
-        // this.audioManager.playSplashSound();
         this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
       } else {
-        // this.audioManager.stopSplashSound();
         this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
       }
     }, 50);
   }
 
+  /**
+   * Checks if the bottle has hit the ground and plays splash sound.
+   */
   bottleOnTheGround() {
     if (this.y >= 360) {
       this.isBrocken = true;
@@ -76,6 +94,9 @@ class ThrowableObject extends MovableObject {
     }
   }
 
+  /**
+   * Checks if the bottle collides with any enemies and breaks.
+   */
   bottleHitEnemys() {
     world.enemies.forEach((enemy) => {
       if (this.isColliding(enemy)) {
