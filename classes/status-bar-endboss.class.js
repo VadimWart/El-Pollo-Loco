@@ -14,21 +14,30 @@ class StatusBarEndboss extends DrawableObject {
     "img/7_statusbars/2_statusbar_endboss/orange/orange100.png",
   ];
 
+  /**
+   * Initializes the ProgressImage instance.
+   * Loads all images into the cache and sets the initial display to 100%.
+   */
   constructor() {
     super();
-    // Lade alle Bilder ins imageCache
     this.loadImages(this.IMAGES);
-    this.setPercentage(100); // Setze das anfängliche Bild basierend auf dem Prozentsatz
+    this.setPercentage(100);
   }
 
-  // Setzt den Prozentsatz und wählt das entsprechende Bild aus dem Cache
+  /**
+   * Updates the percentage and sets the corresponding image.
+   * @param {number} percentage - The progress or health level, ranging from 0 to 100.
+   */
   setPercentage(percentage) {
-    this.percentage = percentage; // => 0 ... 5
+    this.percentage = percentage;
     let path = this.IMAGES[this.resolveImageIndex()];
-    this.img = this.imageCache[path]; // Hole das Bild aus dem Cache
+    this.img = this.imageCache[path];
   }
 
-  // Bestimmt das entsprechende Bild basierend auf dem Prozentsatz
+  /**
+   * Determines the index of the image to display based on the percentage.
+   * @returns {number} - Index of the appropriate image for the current percentage.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;
