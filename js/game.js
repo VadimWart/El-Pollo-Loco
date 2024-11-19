@@ -112,11 +112,11 @@ function mobileButtons() {
   });
   document.getElementById("btnThrow").addEventListener("touchstart", (e) => {
     e.preventDefault();
-    keyboard.THROW = true;
+    keyboard.D = true;
   });
   document.getElementById("btnThrow").addEventListener("touchend", (e) => {
     e.preventDefault();
-    keyboard.THROW = false;
+    keyboard.D = false;
   });
 }
 
