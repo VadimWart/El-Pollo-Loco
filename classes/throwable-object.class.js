@@ -4,6 +4,12 @@ class ThrowableObject extends MovableObject {
   isBrocken = false;
   intervalTrow;
   intervalBottle;
+  offset = {
+    top: 10, 
+    bottom: 10,
+    left: 10,
+    right: 10
+};
 
   IMAGES_BOTTLE_ROTATION = [
     "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",

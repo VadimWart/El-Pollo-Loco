@@ -4,6 +4,13 @@ class Character extends MovableObject {
   width = 150;
   speed = 10;
   lastMove = Date.now();
+  world;
+  offset = {
+    top: 120,
+    bottom: 12,
+    left: 30,
+    right: 40
+  }
 
   /**
    * Arrays holding paths to images for different character animations.

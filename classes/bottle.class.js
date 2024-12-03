@@ -2,7 +2,12 @@ class Bottle extends DrawableObject {
   y = 340;
   width = 60;
   height = 80;
-
+  offset = {
+    top: 50,
+    bottom: 50,
+    left: 50,
+    right: 50
+}
   /**
    * Array containing paths to salsa bottle images.
    */
